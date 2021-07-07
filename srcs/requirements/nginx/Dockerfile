@@ -1,7 +1,9 @@
 FROM  debian:buster
 RUN apt-get update -y && apt-get -y install nginx
-COPY /Users/bcherie/Inception/srcs/requirements/nginx.conf /etc/nginx/sites-available
-RUN ln -s /etc/nginx/sites-available/nginx.conf /etc/nginx/sites-enabled/nginx.conf
+RUN apt-get -y install openssl
+RUN apt-get -y install vim
+COPY ./nginx.conf /etc/nginx/sites-available/default
+#RUN ln -s /etc/nginx/sites-available/nginx.conf /etc/nginx/sites-enabled/nginx.conf
 
 #there???
 #generation key and cert:
@@ -10,8 +12,9 @@ RUN openssl req -newkey rsa:2048 -nodes -x509 -days 365 \
 	-keyout etc/ssl/key.key  \
 	-out etc/ssl/cert.cert
 
-RUN usermod -u 1000 www-data
+#RUN usermod -u 1000 www-data
+RUN chown -R www-data /var/www/html/*
 
-EXPOSE 80
+EXPOSE 443
 
-CMD ["nginx"]
+CMD ["nginx","-g","daemon off;"]

@@ -1,0 +1,26 @@
+version: "3"
+# Список наших сервисов (контейнеров)
+services:
+    nginx:
+        # используем последний стабильный образ nginx
+        image: nginx:latest
+        container_name: nginx
+        # маршрутизируем порты
+        ports:
+            - 443:443
+        # монтируем директории, слева директории на основной машине, справа - куда они монтируются в контейнере
+        #volumes:
+        #    - .srcs/requirements/nginx:/etc/nginx/conf.d
+            #подумать/сделать папку у себя в проекте:
+        #    - ./www:/var/www/html
+            #- ./logs/nginx:/var/log/nginx
+        # nginx должен общаться с php контейнером
+    #    depends_on:
+    #        - wordpress
+        build: requirements/nginx/
+    #wordpress:
+    #    image: wordpress
+    #    depends_on:
+    #        - mysql
+        #путь к файлу с переменными окружения (вместо строчек выше)
+        #env_var: .env

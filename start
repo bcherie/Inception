@@ -1,0 +1,16 @@
+docker-compose up -d
+docker-compose build
+-внести изменения в контейнер:
+docker exec -it e90e12f70418 /bin/bash
+docker build -t my_container .
+
+
+В докер композ прописать сеть, которая будет связывать между собой все контейнеры, которые
+прописаны в это файоеб иначе контейнеры друг друга не увидят.
+
+networks command:
+при запуске Docker автоматически создается сеть bridge по умолчанию.
+Все вновь запущенные контейнеры будут автоматически подключаться к ней.
+# docker network
+see lists available networks:
+# docker network ls
