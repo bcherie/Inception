@@ -14,6 +14,8 @@ RUN openssl req -newkey rsa:2048 -nodes -x509 -days 365 \
 
 #RUN usermod -u 1000 www-data
 RUN chown -R www-data /var/www/html/*
+RUN chmod 777 -R /var/www
+#RUN chmod -R 777 /var/www/html/*
 
 EXPOSE 443
 

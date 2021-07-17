@@ -14,3 +14,14 @@ networks command:
 # docker network
 see lists available networks:
 # docker network ls
+
+
+Команда docker system prune удалит остановленные контейнеры,
+все висячие образы и все неиспользуемые сети:
+docker system prune
+
+Удаляем один или несколько контейнеров:
+docker container ls -a
+docker container rm cc3f2ff51cab cd20b396a061
+
+docker rmi Image_Name
