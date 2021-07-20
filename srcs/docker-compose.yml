@@ -8,15 +8,15 @@ networks:
 services:
     nginx:
         # используем последний стабильный образ nginx
-        image: nginx:latest
+        image: nginx
         container_name: nginx
         # маршрутизируем порты
         ports:
             - "443:443"
         # монтируем директории, слева директории на основной машине, справа - куда они монтируются в контейнере
-        #volumes:
+        volumes:
             #- ./nginx:/etc/nginx/conf.d
-        #    - data/wordpress:/var/www/html
+            - /home/bcherie/data/wordpress:/var/www/wordpress
             #подумать/сделать папку у себя в проекте:
             #- ./www:/var/www/html
             #- ./logs/nginx:/var/log/nginx
@@ -28,12 +28,11 @@ services:
         build: requirements/nginx/
         restart: always
     wordpress:
-        image: wordpress:4.7.1-php7.0-fpm
-        ports:
-            - '9000:9000'
+        image: wordpress
+        container_name: wordpress
         env_file: .env
-        #volumes:
-        #    - home/bcherie/data/wordpress:/var/www/html
+        volumes:
+            - /home/bcherie/data/wordpress:/wordpress/
         networks:
             - network
         depends_on:
@@ -52,13 +51,9 @@ services:
     mysql:
         image: mariadb
         container_name: mariadb
-        #ports:
-        #    - "3306:3306"
-            #think about it!!!!
-            #- "9000:9000"
         env_file: .env
-        #volumes:
-        #    - home/bcherie/data/mariadb:/var/lib/mysql
+        volumes:
+            - /home/bcherie/data/mariadb:/var/lib/mysql
         networks:
             - network
         #- ./logs/mysql:/var/log/mysql
@@ -70,6 +65,6 @@ services:
         build: requirements/mariadb/
         #путь к файлу с переменными окружения (вместо строчек выше)
         #env_var: .env
-volumes:
-  db_data: {}
-  wordpress_data: {}
+# volumes:
+#   db_data: {}
+#   wordpress_data: {}

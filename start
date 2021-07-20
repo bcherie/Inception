@@ -25,3 +25,6 @@ docker container ls -a
 docker container rm cc3f2ff51cab cd20b396a061
 
 docker rmi Image_Name
+
+
+/etc/php/7.3/fpm

@@ -23,13 +23,13 @@
 define( 'DB_NAME', 'bcherie_db' );
 
 /** Имя пользователя MySQL */
-define( 'DB_USER', 'bcherie' );
+define( 'DB_USER', 'bcherie' ); // -> define ( 'DB_USER', getenv(DB_USER) )
 
 /** Пароль к базе данных MySQL */
 define( 'DB_PASSWORD', '1234' );
 
 /** Имя сервера MySQL */
-define( 'DB_HOST', 'localhost' );
+define( 'DB_HOST', 'mariadb' );
 
 /** Кодировка базы данных для создания таблиц. */
 define( 'DB_CHARSET', 'utf8' );
@@ -77,6 +77,7 @@ $table_prefix = 'wp_';
  * @link https://ru.wordpress.org/support/article/debugging-in-wordpress/
  */
 define( 'WP_DEBUG', false );
+// TODO:
 
 /* Это всё, дальше не редактируем. Успехов! */
 
