@@ -2,11 +2,6 @@
 FROM  debian:buster
 RUN apt-get update -y && apt-get install -y php7.3 php-mysql php-fpm php-pdo php-gd php-cli php-mbstring php-xml
 
-#php
-ADD		https://files.phpmyadmin.net/phpMyAdmin/5.1.1/phpMyAdmin-5.1.1-all-languages.tar.gz phpMyAdmin-5.1.1-all-languages.tar.gz
-#&& mv phpMyAdmin-5.1.1-all-languages phpmyadmin && mv phpmyadmin /var/www/html/
-#COPY 	./srcs/config.inc.php /var/www/html/phpmyadmin
-
 #wp
 ADD 	https://ru.wordpress.org/latest-ru_RU.tar.gz wordpress-5.7.2-ru_RU.tar.gz
 RUN 	tar -xf wordpress-5.7.2-ru_RU.tar.gz
@@ -16,8 +11,10 @@ RUN 	tar -xf wordpress-5.7.2-ru_RU.tar.gz
 COPY	./www.conf /etc/php/7.3/fpm/pool.d/www.conf
 # COPY	./wordpress/config.inc.php /var/www/html/wordpress
 COPY ./wp-config-sample.php /wordpress/wp-config.php
+COPY	./start.sh ./
 #RUN mv wordpress /usr/local/bin/wp
 #RUN		chown -R www-data /var/www/html/*
 RUN	chmod -R 777 /wordpress/*
+#ENTRYPOINT service php-fpm7.3 start && /bin/bash
 # ENTRYPOINT ["php-fpm7.3", "-F"]
 CMD ["tail", "-f", "/dev/null"]

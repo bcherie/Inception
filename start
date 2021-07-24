@@ -28,3 +28,5 @@ docker rmi Image_Name
 
 
 /etc/php/7.3/fpm
+
+172.18.0.1

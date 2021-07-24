@@ -3,7 +3,6 @@ version: "3"
 
 networks:
   network:
-        name: network
         driver: bridge
 services:
     nginx:
@@ -16,7 +15,7 @@ services:
         # монтируем директории, слева директории на основной машине, справа - куда они монтируются в контейнере
         volumes:
             #- ./nginx:/etc/nginx/conf.d
-            - /home/bcherie/data/wordpress:/var/www/wordpress
+            - /Users/bcherie/data/wordpress:/var/www/wordpress
             #подумать/сделать папку у себя в проекте:
             #- ./www:/var/www/html
             #- ./logs/nginx:/var/log/nginx
@@ -32,7 +31,7 @@ services:
         container_name: wordpress
         env_file: .env
         volumes:
-            - /home/bcherie/data/wordpress:/wordpress/
+            - /Users/bcherie/data/wordpress:/wordpress/
         networks:
             - network
         depends_on:
@@ -53,7 +52,7 @@ services:
         container_name: mariadb
         env_file: .env
         volumes:
-            - /home/bcherie/data/mariadb:/var/lib/mysql
+            - /Users/bcherie/data/mariadb:/var/lib/mysql
         networks:
             - network
         #- ./logs/mysql:/var/log/mysql
