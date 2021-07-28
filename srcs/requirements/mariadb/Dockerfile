@@ -7,7 +7,7 @@ RUN		mkdir /var/run/mysqld
 RUN		mkfifo /var/run/mysqld/mysqld.sock
 #RUN     sed '/skip-networking/s/^/#/g' /etc/mysql/mariadb-server.cnf
 COPY	./start.sh /
-RUN		chmod -R 777 ./start.sh
+RUN		chmod -R 777 /start.sh
 # RUN		mkdir /run/mysqld/
 # RUN		chown mysql:mysql /run/mysqld/
 # RUN		chmod -R 755 /run/mysqld/
@@ -19,10 +19,10 @@ EXPOSE	3306
 # CMD		mysqld_safe && tail -f /dev/null
 #ENTRYPOINT ["mysqld"]
 # ENTRYPOINT bash start.sh
-RUN		./start.sh
-RUN		chown -R mysql /var/run/mysqld
-RUN     chown mysql:mysql /var/run/mysqld
-ENTRYPOINT [ "mysqld" ]
-CMD [ "-u root" ]
-# #CMD [ "sh", "start.sh", "etc/mysql/my.cnf" ]
+RUN     chmod +x /start.sh
+#RUN     chown mysql:mysql /var/run/mysqld
+# RUN		/start.sh
+# ENTRYPOINT [ "mysqld" ]
+# CMD [ "-u root" ]
+CMD /start.sh
 # #/etc/init.d/mysql restart
