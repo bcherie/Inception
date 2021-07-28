@@ -1,5 +1,5 @@
 FROM  debian:buster
-RUN apt-get update -y && apt-get -y install nginx
+RUN apt-get update -y && apt-get -y install nginx vim net-tools
 RUN apt-get -y install openssl
 RUN apt-get -y install vim
 COPY ./nginx.conf /etc/nginx/sites-available/default

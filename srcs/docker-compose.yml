@@ -15,7 +15,8 @@ services:
         # монтируем директории, слева директории на основной машине, справа - куда они монтируются в контейнере
         volumes:
             #- ./nginx:/etc/nginx/conf.d
-            - /Users/bcherie/data/wordpress:/var/www/wordpress
+            - wordpress:/var/www/wordpress
+            # /Users/bcherie/data/wordpress/:/usr/src/wordpress/wp-config-sample.php
             #подумать/сделать папку у себя в проекте:
             #- ./www:/var/www/html
             #- ./logs/nginx:/var/log/nginx
@@ -29,9 +30,11 @@ services:
     wordpress:
         image: wordpress
         container_name: wordpress
+        ports:
+            - '9000'
         env_file: .env
         volumes:
-            - /Users/bcherie/data/wordpress:/wordpress/
+            - wordpress:/var/www/wordpress
         networks:
             - network
         depends_on:
@@ -50,11 +53,14 @@ services:
     mysql:
         image: mariadb
         container_name: mariadb
-        env_file: .env
+        env_file:
+            - .env
         volumes:
-            - /Users/bcherie/data/mariadb:/var/lib/mysql
+            - mariadb:/var/lib/mysql
         networks:
             - network
+        # ports:
+        #     - 3306
         #- ./logs/mysql:/var/log/mysql
         #- ./mysql-files:/var/lib/mysql-files
         #- ./data:/docker-entrypoint-initdb.d
@@ -63,7 +69,16 @@ services:
         restart: always
         build: requirements/mariadb/
         #путь к файлу с переменными окружения (вместо строчек выше)
-        #env_var: .env
-# volumes:
-#   db_data: {}
-#   wordpress_data: {}
+volumes:
+  wordpress:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /Users/bcherie/data/wordpress
+  mariadb:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /Users/bcherie/data/mariadb

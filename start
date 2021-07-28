@@ -30,3 +30,9 @@ docker rmi Image_Name
 /etc/php/7.3/fpm
 
 172.18.0.1
+
+for my.cnf:
+[root@www.cndba.cn support-files]
+https://www.programmersought.com/article/60161933059/
+
+netstat -anp|grep 3306
