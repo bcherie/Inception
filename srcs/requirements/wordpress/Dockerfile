@@ -4,33 +4,19 @@ RUN apt-get update -y && apt-get install -y vim php7.3 php-mysql php-fpm php-pdo
 RUN mkdir /run/php/
 #wp
 RUN		mkdir -p /var/www/wordpress
-# RUN		chmod 777 /var/www/wordpress/
-# ADD 	https://ru.wordpress.org/latest-ru_RU.tar.gz wordpress.tar.gz
-# RUN 	tar -xzvf wordpress.tar.gz
+RUN		chown -R www-data:www-data /var/www/wordpress
+RUN		chmod 777 /var/www/wordpress
+
 ADD     https://wordpress.org/latest.tar.gz .
 RUN     tar -xf latest.tar.gz && rm -rf latest.tar.gz
-# && \
-#        mv /wordpress/* /var/www/wordpress/ && \
-#        rm -rf /wordpress
 COPY    ./wp-config-sample.php /
-
-# RUN		mv wordpress /usr/src/wordpress/
-# COPY	./wp-config-sample.php /usr/src/wordpress/
-# RUN chown -R www-data:www-data /usr/src/wordpress/*
-
-# RUN		mkdir -p /var/www/wordpress
-# RUN		chown -R www-data /var/www/wordpress/*
-# RUN		chmod 777 /var/www/wordpress/
-# RUN		chown -R www-data /var/www/*
-#COPY	./wp-config-sample.php /var/www/wordpress/
-#/var/www/html/ && rm wordpress.tar.gz
-#COPY	./wordpress/wp-config-sample.php /var/www/wordpress
 COPY	./www.conf /etc/php/7.3/fpm/pool.d/www.conf
-# COPY	./wordpress/config.inc.php /var/www/html/wordpress
 
-# RUN		mkdir -p /var/www/wordopress/
-# RUN		chmod 777 /var/www/wordpress/
-#RUN		mv /wp /var/www/wordpress/
+ADD https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar .
+RUN chmod +x wp-cli.phar
+# RUN mv wp-cli.phar /usr/bin/wp
+RUN mv wp-cli.phar /usr/local/bin/wp
+
 COPY	./start.sh /
 #RUN mv wordpress /usr/local/bin/wp
 RUN chmod -R 777 /etc/php/7.3/fpm/*

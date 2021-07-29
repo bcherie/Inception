@@ -5,6 +5,7 @@ RUN		chmod 644 /etc/mysql/my.cnf
 ###
 RUN		mkdir /var/run/mysqld
 RUN		mkfifo /var/run/mysqld/mysqld.sock
+RUN		chown -R mysql:mysql /var/lib/mysql
 #RUN     sed '/skip-networking/s/^/#/g' /etc/mysql/mariadb-server.cnf
 COPY	./start.sh /
 RUN		chmod -R 777 /start.sh
