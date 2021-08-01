@@ -24,9 +24,11 @@ define( 'DB_NAME', '${DB_NAME}' );
 
 /** Имя пользователя MySQL */
 define( 'DB_USER', '${DB_USER}' ); // -> define ( 'DB_USER', getenv('DB_USER') )
+define( 'DB_USER', '${SEC_USER}' );
 
 /** Пароль к базе данных MySQL */
 define( 'DB_PASSWORD', '${DB_PASSWORD}' );
+define( 'DB_PASSWORD', '${SEC_PASS}' );
 
 /** Имя сервера MySQL */
 define( 'DB_HOST', '${DB_HOST}' );

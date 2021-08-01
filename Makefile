@@ -1,7 +1,7 @@
 all:
 	docker-compose -f srcs/docker-compose.yaml up --build -d
 vclean:
-	rm -rf /home/bcherie/data/*
+	docker volume rm $(docker volume ls -q)
 logs:
 	docker-compose logs
 re:

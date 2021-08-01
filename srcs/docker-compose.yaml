@@ -27,29 +27,6 @@ services:
             - wordpress
         build: requirements/nginx/
         restart: always
-    wordpress:
-        image: wordpress
-        container_name: wordpress
-        ports:
-            - '9000'
-        env_file: .env
-        volumes:
-            - wordpress:/var/www/wordpress
-        networks:
-            - network
-        depends_on:
-            - mysql
-        build: requirements/wordpress/
-        restart: always
-    #php:
-        # у нас свой образ для PHP, указываем путь к нему и говорим что его надо собрать
-    #    build: ./images/php
-        # этот образ будет общаться с mysql
-     #   links:
-     #       - mysql
-        # монтируем директорию с проектами
-     #   volumes:
-     #       - ./www:/var/www
     mysql:
         image: mariadb
         container_name: mariadb
@@ -69,16 +46,40 @@ services:
         restart: always
         build: requirements/mariadb/
         #путь к файлу с переменными окружения (вместо строчек выше)
+    wordpress:
+        image: wordpress
+        container_name: wordpress
+        ports:
+            - '9000'
+        env_file:
+            - .env
+        volumes:
+            - wordpress:/var/www/wordpress
+        networks:
+            - network
+        depends_on:
+            - mysql
+        build: requirements/wordpress/
+        restart: always
+    #php:
+        # у нас свой образ для PHP, указываем путь к нему и говорим что его надо собрать
+    #    build: ./images/php
+        # этот образ будет общаться с mysql
+     #   links:
+     #       - mysql
+        # монтируем директорию с проектами
+     #   volumes:
+     #       - ./www:/var/www
 volumes:
   wordpress:
     driver: local
     driver_opts:
       o: bind
       type: none
-      device: /home/bcherie/data/wordpress
+      device: /Users/bcherie/data/wordpress
   mariadb:
     driver: local
     driver_opts:
       o: bind
       type: none
-      device: /home/bcherie/data/mariadb
+      device: /Users/bcherie/data/mariadb

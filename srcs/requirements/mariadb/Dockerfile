@@ -1,7 +1,8 @@
 FROM 	debian:buster
 RUN		apt-get update -y && apt-get -y install mariadb-server curl vim net-tools
 COPY	./my.cnf /etc/mysql/my.cnf
-RUN		chmod 644 /etc/mysql/my.cnf
+#e	RUN		chmod 644 /etc/mysql/my.cnf
+RUN		chmod 775 /var/lib/mysql
 ###
 RUN		mkdir /var/run/mysqld
 RUN		mkfifo /var/run/mysqld/mysqld.sock
