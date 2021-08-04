@@ -4,8 +4,6 @@ vclean:
 	docker volume rm $(docker volume ls -q)
 logs:
 	docker-compose logs
-re:
-	clean all
 
 clean:
 	docker stop $$(docker ps -a -q)

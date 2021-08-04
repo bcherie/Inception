@@ -1,13 +1,7 @@
 mkdir -p /var/lib/mysql
 chown -R mysql:mysql /var/lib/mysql
-# chmod 777 /var/run/mysqld/mysqld.sock
 
-#mariadb-install-db -u root
-#mysql_install_db --user=mysql --datadir=/var/lib/mysql
-#mysql_install_db
 service -u root mysql start
-# mysql_install_db
-# mysqld -u root & sleep 5
 
 mysql -u root -e "CREATE DATABASE IF NOT EXISTS $DB_NAME DEFAULT CHARACTER SET utf8;"
 mysql -u root -e "CREATE USER IF NOT EXISTS '$DB_USER'@'%' IDENTIFIED BY '$DB_PASSWORD';"

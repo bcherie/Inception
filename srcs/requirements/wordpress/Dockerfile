@@ -3,13 +3,13 @@ FROM  debian:buster
 RUN apt-get update -y && apt-get install -y vim php7.3 php-mysql php-fpm php-pdo php-gd php-cli php-mbstring php-xml net-tools curl
 RUN mkdir /run/php/
 #wp
-RUN		mkdir -p /var/www/wordpress
-RUN		chown -R www-data:www-data /var/www/wordpress
-RUN		chmod 777 /var/www/wordpress
+# RUN		mkdir -p /var/www/wordpress
+# RUN		chown -R www-data:www-data /var/www/wordpress
+# RUN		chmod 777 /var/www/wordpress
 
-# ADD     https://wordpress.org/latest.tar.gz .
-# RUN     tar -xf latest.tar.gz && rm -rf latest.tar.gz
-COPY    ./wp-config-sample.php /
+ADD     https://wordpress.org/latest.tar.gz .
+RUN     tar -xf latest.tar.gz && rm -rf latest.tar.gz
+COPY    ./wp-config.php /
 COPY	./www.conf /etc/php/7.3/fpm/pool.d/www.conf
 
 # RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar

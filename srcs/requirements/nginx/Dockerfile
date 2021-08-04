@@ -8,7 +8,7 @@ COPY ./nginx.conf /etc/nginx/sites-available/default
 #there???
 #generation key and cert:
 RUN openssl req -newkey rsa:2048 -nodes -x509 -days 365 \
-	-subj "/C=RU/ST=Moscow/L=Moscow/O=Bcherie/CN=localhost" \
+	-subj "/C=RU/ST=Moscow/L=Moscow/O=bcherie/CN=bcherie.42.fr" \
 	-keyout etc/ssl/key.key  \
 	-out etc/ssl/cert.cert
 #RUN usermod -u 1000 www-data
