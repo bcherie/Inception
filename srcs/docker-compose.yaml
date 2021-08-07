@@ -6,13 +6,10 @@ networks:
         driver: bridge
 services:
     nginx:
-        # используем последний стабильный образ nginx
         image: nginx
         container_name: nginx
-        # маршрутизируем порты
         ports:
             - "443:443"
-        # монтируем директории, слева директории на основной машине, справа - куда они монтируются в контейнере
         volumes:
             - wordpress:/var/www/wordpress
         networks:
@@ -21,7 +18,7 @@ services:
             - wordpress
         build: requirements/nginx/
         restart: always
-    mysql:
+    mariadb:
         image: mariadb
         container_name: mariadb
         env_file:
@@ -44,7 +41,7 @@ services:
         networks:
             - network
         depends_on:
-            - mysql
+            - mariadb
         build: requirements/wordpress/
         restart: always
 volumes:
